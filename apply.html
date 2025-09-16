@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Apply for Jobs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .lang-section { display: flex; justify-content: flex-end; align-items: center; margin: 1em 2em 0 0; gap: 0.5em; z-index: 10; position: relative;}
+    .lang-label { font-size: 1em; color: #2c3e50; font-weight: bold;}
+    .lang-select { padding: 0.4em 1em; font-size: 1em; border-radius: 6px; border: 1px solid #11998e; background: #e0eafc; cursor: pointer; font-weight: 500;}
+    .apply-form label { font-weight: 500; }
+    .apply-form input, .apply-form select { padding: 0.5em; font-size: 1em; border-radius: 6px; border: 1px solid #11998e; width: 95%; margin-bottom: 1em; }
+    .apply-form { background: #f8f9fa; border-radius: 16px; box-shadow: 0 2px 10px #e3e3e3; padding: 2em; max-width: 400px; margin: 2em auto;}
+    .apply-btn { background: linear-gradient(90deg, #11998e 70%, #2c3e50 100%); color: #fff; padding: 0.8em 1.4em; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 1.1em;}
+    .apply-btn:hover { background: linear-gradient(90deg, #2c3e50 60%, #11998e 100%);}
+  </style>
+</head>
+<body>
+  <div class="lang-section">
+    <span class="lang-label" id="langLabel">Language:</span>
+    <select class="lang-select" id="languageSelect">
+      <option value="en">English</option>
+      <option value="hi">हिन्दी</option>
+      <option value="mr">मराठी</option>
+      <option value="ta">தமிழ்</option>
+    </select>
+  </div>
+  <header>
+    <h1 id="headerTitle">Apply for Jobs</h1>
+    <p id="headerDesc">Choose a job and city to apply</p>
+  </header>
+  <div class="main-section">
+    <form class="apply-form">
+      <label for="role" id="labelRole">Job Role:</label>
+      <select id="role" name="role" required>
+        <option value="" id="optionChooseRole">Select Job Role</option>
+        <option value="Security Guard" id="optionGuard">Security Guard</option>
+        <option value="Plumber" id="optionPlumber">Plumber</option>
+        <option value="Driver" id="optionDriver">Driver</option>
+        <option value="Electrician" id="optionElectrician">Electrician</option>
+        <option value="Cleaner" id="optionCleaner">Cleaner</option>
+      </select>
+      <label for="city" id="labelCity">City:</label>
+      <select id="city" name="city" required>
+        <option value="" id="optionChooseCity">Select City</option>
+        <option value="Mumbai" id="optionMumbai">Mumbai</option>
+        <option value="Delhi" id="optionDelhi">Delhi</option>
+        <option value="Noida" id="optionNoida">Noida</option>
+      </select>
+      <label for="name" id="labelName">Your Name:</label>
+      <input type="text" id="name" name="name" required placeholder="Enter your name">
+      <label for="contact" id="labelContact">Contact Number:</label>
+      <input type="text" id="contact" name="contact" required placeholder="Enter your contact">
+      <button type="submit" class="apply-btn" id="btnApply">Apply Now</button>
+    </form>
+    <div id="applySuccess" style="display:none; text-align:center; margin-top:2em; color:green;">
+      <h3 id="successHeading">Your application has been received!</h3>
+      <p id="successText">We will contact you soon.</p>
+    </div>
+  </div>
+  <footer>
+    <p id="footerText">Made by Your Team | 2025</p>
+  </footer>
+  <script>
+    const translations = {
+      en: {
+        headerTitle: "Apply for Jobs",
+        headerDesc: "Choose a job and city to apply",
+        labelRole: "Job Role:",
+        optionChooseRole: "Select Job Role",
+        optionGuard: "Security Guard",
+        optionPlumber: "Plumber",
+        optionDriver: "Driver",
+        optionElectrician: "Electrician",
+        optionCleaner: "Cleaner",
+        labelCity: "City:",
+        optionChooseCity: "Select City",
+        optionMumbai: "Mumbai",
+        optionDelhi: "Delhi",
+        optionNoida: "Noida",
+        labelName: "Your Name:",
+        labelContact: "Contact Number:",
+        btnApply: "Apply Now",
+        successHeading: "Your application has been received!",
+        successText: "We will contact you soon.",
+        footerText: "Made by Your Team | 2025",
+        langLabel: "Language:"
+      },
+      hi: {
+        headerTitle: "नौकरी के लिए आवेदन करें",
+        headerDesc: "नौकरी और शहर चुनें और आवेदन करें",
+        labelRole: "नौकरी रोल:",
+        optionChooseRole: "रोल चुनें",
+        optionGuard: "सुरक्षा गार्ड",
+        optionPlumber: "प्लंबर",
+        optionDriver: "ड्राइवर",
+        optionElectrician: "बिजली मिस्त्री",
+        optionCleaner: "क्लीनर",
+        labelCity: "शहर:",
+        optionChooseCity: "शहर चुनें",
+        optionMumbai: "मुंबई",
+        optionDelhi: "दिल्ली",
+        optionNoida: "नोएडा",
+        labelName: "आपका नाम:",
+        labelContact: "संपर्क नंबर:",
+        btnApply: "अभी आवेदन करें",
+        successHeading: "आपका आवेदन प्राप्त हो गया है!",
+        successText: "हम जल्द ही आपसे संपर्क करेंगे।",
+        footerText: "आपकी टीम द्वारा बनाया गया | 2025",
+        langLabel: "भाषा:"
+      },
+      mr: {
+        headerTitle: "नोकरीसाठी अर्ज करा",
+        headerDesc: "नोकरी आणि शहर निवडा आणि अर्ज करा",
+        labelRole: "नोकरी भूमिका:",
+        optionChooseRole: "भूमिका निवडा",
+        optionGuard: "सुरक्षा गार्ड",
+        optionPlumber: "प्लंबर",
+        optionDriver: "ड्रायव्हर",
+        optionElectrician: "इलेक्ट्रिशियन",
+        optionCleaner: "क्लीनर",
+        labelCity: "शहर:",
+        optionChooseCity: "शहर निवडा",
+        optionMumbai: "मुंबई",
+        optionDelhi: "दिल्ली",
+        optionNoida: "नोईडा",
+        labelName: "तुमचं नाव:",
+        labelContact: "संपर्क नंबर:",
+        btnApply: "आता अर्ज करा",
+        successHeading: "तुमचा अर्ज प्राप्त झाला आहे!",
+        successText: "आम्ही लवकरच संपर्क करू.",
+        footerText: "आपल्या टीमने तयार केले | 2025",
+        langLabel: "भाषा:"
+      },
+      ta: {
+        headerTitle: "வேலைக்கு விண்ணப்பிக்க",
+        headerDesc: "வேலை மற்றும் நகரத்தை தேர்ந்தெடுத்து விண்ணப்பிக்கவும்",
+        labelRole: "வேலை வகை:",
+        optionChooseRole: "வேலை தேர்ந்தெடுக்கவும்",
+        optionGuard: "பாதுகாப்பு காவலர்",
+        optionPlumber: "பிளம்பர்",
+        optionDriver: "டிரைவர்",
+        optionElectrician: "எலக்ட்ரீஷியன்",
+        optionCleaner: "க்ளீனர்",
+        labelCity: "நகரம்:",
+        optionChooseCity: "நகரத்தை தேர்ந்தெடுக்கவும்",
+        optionMumbai: "மும்பை",
+        optionDelhi: "டெல்லி",
+        optionNoida: "நோய்டா",
+        labelName: "உங்கள் பெயர்:",
+        labelContact: "தொடர்பு எண்:",
+        btnApply: "இப்போது விண்ணப்பிக்கவும்",
+        successHeading: "உங்கள் விண்ணப்பம் பெறப்பட்டது!",
+        successText: "நாங்கள் விரைவில் தொடர்பு கொள்வோம்.",
+        footerText: "உங்கள் குழுவால் உருவாக்கப்பட்டது | 2025",
+        langLabel: "மொழி:"
+      }
+    };
+
+    let currentLang = localStorage.getItem('language') || 'en';
+
+    function updateLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem('language', lang);
+      const t = translations[lang];
+      document.getElementById("headerTitle").innerText = t.headerTitle;
+      document.getElementById("headerDesc").innerText = t.headerDesc;
+      document.getElementById("labelRole").innerText = t.labelRole;
+      document.getElementById("optionChooseRole").innerText = t.optionChooseRole;
+      document.getElementById("optionGuard").innerText = t.optionGuard;
+      document.getElementById("optionPlumber").innerText = t.optionPlumber;
+      document.getElementById("optionDriver").innerText = t.optionDriver;
+      document.getElementById("optionElectrician").innerText = t.optionElectrician;
+      document.getElementById("optionCleaner").innerText = t.optionCleaner;
+      document.getElementById("labelCity").innerText = t.labelCity;
+      document.getElementById("optionChooseCity").innerText = t.optionChooseCity;
+      document.getElementById("optionMumbai").innerText = t.optionMumbai;
+      document.getElementById("optionDelhi").innerText = t.optionDelhi;
+      document.getElementById("optionNoida").innerText = t.optionNoida;
+      document.getElementById("labelName").innerText = t.labelName;
+      document.getElementById("labelContact").innerText = t.labelContact;
+      document.getElementById("btnApply").innerText = t.btnApply;
+      document.getElementById("successHeading").innerText = t.successHeading;
+      document.getElementById("successText").innerText = t.successText;
+      document.getElementById("footerText").innerText = t.footerText;
+      document.getElementById("langLabel").innerText = t.langLabel;
+    }
+
+    window.onload = function() {
+      updateLanguage(currentLang);
+      document.getElementById("languageSelect").value = currentLang;
+    };
+
+    document.getElementById("languageSelect").addEventListener("change", function() {
+      updateLanguage(this.value);
+    });
+
+    document.querySelector('.apply-form').onsubmit = function(e) {
+      e.preventDefault();
+      document.querySelector('.apply-form').style.display = 'none';
+      document.getElementById('applySuccess').style.display = 'block';
+    };
+  </script>
+</body>
+</html>
