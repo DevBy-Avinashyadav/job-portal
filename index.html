@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Blue Collar Jobs Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Language selector styling */
+    .lang-section {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin: 1em 2em 0 0;
+      gap: 0.5em;
+      z-index: 10;
+      position: relative;
+    }
+    .lang-label {
+      font-size: 1em;
+      color: #2c3e50;
+      font-weight: bold;
+    }
+    .lang-select {
+      padding: 0.4em 1em;
+      font-size: 1em;
+      border-radius: 6px;
+      border: 1px solid #11998e;
+      background: #e0eafc;
+      cursor: pointer;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <div class="lang-section">
+    <span class="lang-label" id="langLabel">Language:</span>
+    <select class="lang-select" id="languageSelect">
+      <option value="en">English</option>
+      <option value="hi">हिन्दी</option>
+      <option value="mr">मराठी</option>
+      <option value="ta">தமிழ்</option>
+    </select>
+  </div>
+  <div class="header-animated">
+    <div class="header-bg-shape"></div>
+    <div class="header-bg-shape2"></div>
+    <h1 id="headerTitle">Blue Collar Jobs Portal</h1>
+    <p id="headerDesc">Find & Recruit blue-collar workers easily!</p>
+  </div>
+  <div class="main-section">
+    <div class="section-boxes">
+      <div class="section-box apply-box" onclick="window.location.href='apply.html'" tabindex="0">
+        <span class="section-icon">🧑‍🔧</span>
+        <div class="ripple"></div>
+        <h2 id="applyTitle">Apply for Jobs</h2>
+        <p id="applyDesc">Find your next blue-collar job in Mumbai, Delhi, or Noida</p>
+      </div>
+      <div class="section-box recruiter-box" onclick="window.location.href='recruiter.html'" tabindex="0">
+        <span class="section-icon">💼</span>
+        <div class="ripple"></div>
+        <h2 id="recruiterTitle">Recruiter</h2>
+        <p id="recruiterDesc">Post jobs, find workers, and manage recruitment</p>
+      </div>
+    </div>
+    <h3 class="job-title-heading" id="jobRolesHeading">Popular Job Roles</h3>
+    <div class="job-roles-grid" id="jobGrid">
+      <!-- Job role cards injected by JS -->
+    </div>
+  </div>
+  <footer>
+    <p id="footerText">Made by Your Team | 2025</p>
+  </footer>
+  <script src="script.js"></script>
+  <script>
+    // Localized text data
+    const translations = {
+      en: {
+        headerTitle: "Blue Collar Jobs Portal",
+        headerDesc: "Find & Recruit blue-collar workers easily!",
+        applyTitle: "Apply for Jobs",
+        applyDesc: "Find your next blue-collar job in Mumbai, Delhi, or Noida",
+        recruiterTitle: "Recruiter",
+        recruiterDesc: "Post jobs, find workers, and manage recruitment",
+        jobRolesHeading: "Popular Job Roles",
+        jobRoles: ["Security Guard", "Plumber", "Driver", "Electrician", "Cleaner"],
+        footerText: "Made by Your Team | 2025",
+        langLabel: "Language:"
+      },
+      hi: {
+        headerTitle: "ब्लू कॉलर जॉब्स पोर्टल",
+        headerDesc: "ब्लू कॉलर वर्कर्स खोजें और भर्ती करें!",
+        applyTitle: "नौकरी के लिए आवेदन करें",
+        applyDesc: "मुंबई, दिल्ली, या नोएडा में अपनी अगली नौकरी पाएं",
+        recruiterTitle: "नियोक्ता",
+        recruiterDesc: "नौकरियां पोस्ट करें, वर्कर्स खोजें और भर्ती प्रबंधित करें",
+        jobRolesHeading: "लोकप्रिय नौकरी रोल",
+        jobRoles: ["सुरक्षा गार्ड", "प्लंबर", "ड्राइवर", "बिजली मिस्त्री", "क्लीनर"],
+        footerText: "आपकी टीम द्वारा बनाया गया | 2025",
+        langLabel: "भाषा:"
+      },
+      mr: {
+        headerTitle: "ब्लू कॉलर जॉब्स पोर्टल",
+        headerDesc: "ब्लू कॉलर कामगार शोधा आणि भरती करा!",
+        applyTitle: "नोकरीसाठी अर्ज करा",
+        applyDesc: "मुंबई, दिल्ली, किंवा नोईडा येथे तुमची पुढील नोकरी शोधा",
+        recruiterTitle: "भरती करणारे",
+        recruiterDesc: "नोकऱ्या पोस्ट करा, कामगार शोधा आणि भरती व्यवस्थापित करा",
+        jobRolesHeading: "लोकप्रिय नोकरी भूमिका",
+        jobRoles: ["सुरक्षा गार्ड", "प्लंबर", "ड्रायव्हर", "इलेक्ट्रिशियन", "क्लीनर"],
+        footerText: "आपल्या टीमने तयार केले | 2025",
+        langLabel: "भाषा:"
+      },
+      ta: {
+        headerTitle: "நீலம் வேலை வாய்ப்பு தளம்",
+        headerDesc: "நீலம் தொழிலாளர்களை கண்டறிந்து நியமிக்கவும்!",
+        applyTitle: "வேலைக்கு விண்ணப்பிக்க",
+        applyDesc: "மும்பை, டெல்லி, அல்லது நோய்டாவில் உங்கள் அடுத்த வேலைக்கு விண்ணப்பிக்கவும்",
+        recruiterTitle: "ஊழியர்",
+        recruiterDesc: "வேலைகளை பதிவிடவும், தொழிலாளர்களை கண்டறிந்து நிர்வகிக்கவும்",
+        jobRolesHeading: "பிரபலமான வேலை வகைகள்",
+        jobRoles: ["பாதுகாப்பு காவலர்", "பிளம்பர்", "டிரைவர்", "எலக்ட்ரீஷியன்", "கிளீனர்"],
+        footerText: "உங்கள் குழுவால் உருவாக்கப்பட்டது | 2025",
+        langLabel: "மொழி:"
+      }
+    };
+
+    // Current language
+    let currentLang = "en";
+
+    // Update page language
+    function updateLanguage(lang) {
+      currentLang = lang;
+      const t = translations[lang];
+      document.getElementById("headerTitle").innerText = t.headerTitle;
+      document.getElementById("headerDesc").innerText = t.headerDesc;
+      document.getElementById("applyTitle").innerText = t.applyTitle;
+      document.getElementById("applyDesc").innerText = t.applyDesc;
+      document.getElementById("recruiterTitle").innerText = t.recruiterTitle;
+      document.getElementById("recruiterDesc").innerText = t.recruiterDesc;
+      document.getElementById("jobRolesHeading").innerText = t.jobRolesHeading;
+      document.getElementById("footerText").innerText = t.footerText;
+      document.getElementById("langLabel").innerText = t.langLabel;
+
+      // Update job role cards
+      const jobGrid = document.getElementById("jobGrid");
+      jobGrid.innerHTML = "";
+      const icons = ["🛡","🔧","🚗","💡","🧹"];
+      t.jobRoles.forEach((role, idx) => {
+        const card = document.createElement('div');
+        card.className = 'job-card';
+        card.style.animationDelay = (idx * 0.15) + 's';
+        card.innerHTML = `<div class="card-icon">${icons[idx]}</div>
+                          <div class="card-title">${role}</div>`;
+        jobGrid.appendChild(card);
+      });
+    }
+
+    // Initial load
+    window.onload = function() {
+      updateLanguage(currentLang);
+    };
+
+    // Language selector event
+    document.getElementById("languageSelect").addEventListener("change", function() {
+      updateLanguage(this.value);
+    });
+  </script>
+  <script>
+    // Ripple effect for section boxes
+    document.querySelectorAll('.section-box').forEach(box => {
+      box.addEventListener('mousedown', function(e) {
+        const ripple = this.querySelector('.ripple');
+        ripple.style.left = e.offsetX + 'px';
+        ripple.style.top = e.offsetY + 'px';
+        ripple.style.width = '0px';
+        ripple.style.height = '0px';
+        ripple.style.opacity = '0.7';
+        setTimeout(() => {
+          ripple.style.width = '140px';
+          ripple.style.height = '140px';
+          ripple.style.opacity = '0';
+        }, 10);
+        setTimeout(() => {
+          ripple.style.width = '0px';
+          ripple.style.height = '0px';
+          ripple.style.opacity = '0.8';
+        }, 400);
+      });
+    });
+  </script>
+</body>
+</html>
